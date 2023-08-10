@@ -2,7 +2,8 @@
 
 <h3>Forget Password</h3>
 
-<form action="" method="post">
+<form action="{{ route('forget-password-submit') }}" method="post">
+    @csrf
 <div>
     <div>Email</div>
     <div>
@@ -12,7 +13,7 @@
  
 
     <div style="margin-top: 10px;">
-        <input type="submit" value="Login">
+        <input type="submit" value="Submit">
     </div>
 </div>
    
