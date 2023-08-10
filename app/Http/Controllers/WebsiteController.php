@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
+use App\Mail\WebsiteMail;
 
 class WebsiteController extends Controller
 {
@@ -23,10 +24,6 @@ class WebsiteController extends Controller
         return view('register');
     }
 
-    public function forget_password(){
-        return view('forget_password');
-    }
-
     public function register_submit(Request $request){
 
         $token = Hash('sha256', time());
@@ -38,7 +35,25 @@ class WebsiteController extends Controller
         $user->status = 'Pending';
         $user->token = $token;
         $user->save();
+
+        $verification_link = url('register/verify/'.$token.'/'.$request->email);
+        $subject = 'Registration Confirmation';
+        $message = 'Please click this link: <br>'.$verification_link;
+
+        \Mail::to($request->email)->send(new WebsiteMail($subject, $message));
+
+        echo 'Email is sent';
     }
+
+    public function register_verify(){
+        
+    }
+
+    public function forget_password(){
+        return view('forget_password');
+    }
+
+  
 
 
 }
