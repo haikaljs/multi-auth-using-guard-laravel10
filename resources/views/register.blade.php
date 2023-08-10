@@ -2,11 +2,12 @@
 
 <h3>Registration Page</h3>
 
-<form action="" method="post">
+<form action="{{ route('register-submit') }}" method="post">
+    @csrf
 <div>
     <div>Name</div>
     <div>
-        <input type="text" name="email" id="">
+        <input type="text" name="name" id="">
     </div>
     <div>Email</div>
     <div>
