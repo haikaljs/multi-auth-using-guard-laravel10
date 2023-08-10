@@ -38,7 +38,7 @@ class WebsiteController extends Controller
 
         $verification_link = url('register/verify/'.$token.'/'.$request->email);
         $subject = 'Registration Confirmation';
-        $message = 'Please click this link: <br>'.$verification_link;
+        $message = "Please click on this link "."<a href=$verification_link>Click this link</a>";
 
         \Mail::to($request->email)->send(new WebsiteMail($subject, $message));
 
