@@ -24,3 +24,6 @@ Route::post('/register-submit', [WebsiteController::class, 'register_submit'])->
 Route::get('/register/verify/{token}/{email}', [WebsiteController::class, 'register_verify']);
 Route::get('/forget-password', [WebsiteController::class, 'forget_password'])->name('forget-password');
 Route::post('/forget-password-submit', [WebsiteController::class, 'forget_password_submit'])->name('forget-password-submit');
+Route::get('/reset-password/{token}/{email}', [WebsiteController::class, 'reset_password']);
+Route::post('/reset-password-submit', [WebsiteController::class, 'reset_password_submit'])->name('reset-password-submit');
+

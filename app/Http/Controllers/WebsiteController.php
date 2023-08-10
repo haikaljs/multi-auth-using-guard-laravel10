@@ -100,13 +100,24 @@ class WebsiteController extends Controller
         \Mail::to($request->email)->send(new WebsiteMail($subject, $message));
         
         echo 'Check your email';
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-        // $user->status = 'Pending';
-        // $user->token = $token;
-        // $user->save();
+    }
+
+    public function reset_password($token, $email){
+        $user = User::where('token', $token)->where('email', $email)->first();
+        if(!$user){
+            dd('No user is found');
+        }
+
+        return view('reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password_submit(Request $request){
+        $user = User::where('token', $request->token)->where('email', $request->email)->first();
+        $user->token = '';
+        $user->password = Hash::make($request->new_password);
+        $user->update();
+
+        echo 'Password is reset';
     }
  
 
