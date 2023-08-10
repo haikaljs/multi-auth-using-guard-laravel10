@@ -45,8 +45,15 @@ class WebsiteController extends Controller
         echo 'Email is sent';
     }
 
-    public function register_verify(){
-        
+    public function register_verify($token, $email){
+       $user = User::where('token', $token)->where('email', $email)->first();
+       if(!$user){
+        return redirect()->route('login');
+       }
+       $user->status = 'Active';
+       $user->token = "";
+       $user->update();
+       echo 'Registration Verificaton is successfull';
     }
 
     public function forget_password(){
