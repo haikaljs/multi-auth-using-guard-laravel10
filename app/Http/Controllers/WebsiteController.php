@@ -87,7 +87,7 @@ class WebsiteController extends Controller
 
         $user = User::where('email', $request->email)->first();
         if(!$user){
-            dd('Email not found');
+            return redirect()->route('register');
         }
 
         $user->token = $token;
@@ -112,7 +112,11 @@ class WebsiteController extends Controller
     }
 
     public function reset_password_submit(Request $request){
+      
         $user = User::where('token', $request->token)->where('email', $request->email)->first();
+        if(!$user){
+            return redirect()->route('login');
+        }
         $user->token = '';
         $user->password = Hash::make($request->new_password);
         $user->update();
