@@ -21,13 +21,7 @@ class Authenticate extends Middleware
     }
 
  
-    public function handle($request, Closure $next, ...$guards): Response
-    {
-        if(auth()->user()->role == 2){
-            return $next($request);
-        }
-       return redirect()->route('home');
-    }
+  
 
 
      
