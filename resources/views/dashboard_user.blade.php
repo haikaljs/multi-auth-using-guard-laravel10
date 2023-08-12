@@ -8,6 +8,6 @@
 </head>
 <body>
   @include('nav')
-    <h3>Hi {{ Auth::guard('web')->user()->name }}, welcome to your dashboard</h3>
+    <h3>Hi User, welcome to your dashboard</h3>
 </body>
 </html>

@@ -17,6 +17,13 @@ class WebsiteController extends Controller
         return view('dashboard');
     }
 
+    public function dashboard_user(){
+        return view('dashboard_user');
+    }
+    public function dashboard_admin(){
+        return view('dashboard_admin');
+    }
+
     public function settings(){
         return view('settings');
     }
@@ -33,7 +40,12 @@ class WebsiteController extends Controller
         ];
         
         if(Auth::attempt($credentials)){
-            return redirect()->route('dashboard');
+            if(Auth::guard('web')->user()->role == 1){
+                return redirect()->route('dashboard-admin');
+            }else{
+                return redirect()->route('dashboard-user');
+            }
+          
         }else{
             return redirect()->route('login');
         };
