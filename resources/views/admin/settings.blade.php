@@ -7,7 +7,7 @@
     <title>Single Auth</title>
 </head>
 <body>
-  @include('nav')
-    <h3>Hi Admin, welcome to your dashboard</h3>
+  @include('admin.nav')
+    <h3>Hi admin, only admin can see this setting page</h3>
 </body>
 </html>

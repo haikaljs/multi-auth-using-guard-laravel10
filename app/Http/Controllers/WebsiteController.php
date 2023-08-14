@@ -40,13 +40,11 @@ class WebsiteController extends Controller
         ];
         
         if(Auth::attempt($credentials)){
-            if(Auth::guard('web')->user()->role == 1){
-                return redirect()->route('dashboard-admin');
-            }else{
-                return redirect()->route('dashboard-user');
-            }
-          
+
+          return redirect()->route('dashboard-user');
+
         }else{
+
             return redirect()->route('login');
         };
 
@@ -71,7 +69,7 @@ class WebsiteController extends Controller
         $user->password = Hash::make($request->password);
         $user->status = 'Pending';
         $user->token = $token;
-        $user->role = 2;
+       
         $user->save();
 
         $verification_link = url('register/verify/'.$token.'/'.$request->email);

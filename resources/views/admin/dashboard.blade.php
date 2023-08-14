@@ -7,7 +7,8 @@
     <title>Single Auth</title>
 </head>
 <body>
-  @include('nav')
-    <h3>Hi admin, only admin can see this setting page</h3>
+  @include('admin.nav')
+  <h1>Admin Dashboard</h1>
+    <h3>Hi {{ Auth::guard('admin')->user()->name }}, welcome to your dashboard</h3>
 </body>
 </html>
